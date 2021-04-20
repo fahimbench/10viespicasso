@@ -1,0 +1,7 @@
+dask 
+panda
+
+jupyter notebook
+matplotlib
+plotly
+
