@@ -538,22 +538,22 @@ export default class TitleScene extends Phaser.Scene {
         let indexActive = this.titleChapters.map(e => e.active).indexOf(true);
         this.input.keyboard.once('keydown', event => {
             switch (event.key) {
-                case 'ArrowUp':
-                    if(indexActive > 0 && indexActive <= this.titleChapters.length - 1){
-                        this.titleChapters[indexActive].active = false;
-                        this.titleChapters[indexActive].alpha = .5;
-
-                        this.titleChapters[indexActive - 1].active = true;
-                        this.titleChapters[indexActive - 1].alpha = 1;
-                    }
-                    break;
-                case 'ArrowDown':
+                case "ArrowDown":
                     if(indexActive >= 0 && indexActive < this.titleChapters.length - 1){
                         this.titleChapters[indexActive].active = false;
                         this.titleChapters[indexActive].alpha = .5;
 
                         this.titleChapters[indexActive + 1].active = true;
                         this.titleChapters[indexActive + 1].alpha = 1;
+                    }
+                    break;
+                case "ArrowUp":
+                    if(indexActive > 0 && indexActive <= this.titleChapters.length - 1){
+                        this.titleChapters[indexActive].active = false;
+                        this.titleChapters[indexActive].alpha = .5;
+
+                        this.titleChapters[indexActive - 1].active = true;
+                        this.titleChapters[indexActive - 1].alpha = 1;
                     }
                     break;
                 default:
