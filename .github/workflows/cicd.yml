@@ -1,0 +1,30 @@
+name: CICD
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote script
+        if: github.ref == 'refs/heads/main'
+        uses: appleboy/ssh-action@master
+        env:
+          ENV_PATH: ${{ secrets.ENV_PATH }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: ENV_PATH
+          script: |
+            cd $ENV_PATH
+            git clone git@github.com:fahimbench/10viespicasso
+            cd 10viespicasso
+            git checkout main
+            git pull
+            yarn install
+            yarn build
