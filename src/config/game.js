@@ -3,7 +3,7 @@ import TitleScene from "../scenes/TitleScene";
 
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: '#FF00FF',
+    backgroundColor: '#000000',
     scale: {
         parent: '#game',
         mode: Phaser.Scale.FIT,

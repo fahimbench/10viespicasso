@@ -59,6 +59,22 @@ export default class TitleScene extends Phaser.Scene {
         this.load.image('sit1', 'assets/images/Title/Totem 1-2.PNG');
         this.load.image('sit2', 'assets/images/Title/Totem 1-3.PNG');
 
+        this.load.image('letterA', 'assets/images/Title/TYPO TITRE/A.PNG');
+        this.load.image('letterC', 'assets/images/Title/TYPO TITRE/C.PNG');
+        this.load.image('letterD', 'assets/images/Title/TYPO TITRE/D.PNG');
+        this.load.image('letterE', 'assets/images/Title/TYPO TITRE/E.PNG');
+        this.load.image('letterI', 'assets/images/Title/TYPO TITRE/I.PNG');
+        this.load.image('letterL', 'assets/images/Title/TYPO TITRE/L.PNG');
+        this.load.image('letterO', 'assets/images/Title/TYPO TITRE/O.PNG');
+        this.load.image('letterP', 'assets/images/Title/TYPO TITRE/P.PNG');
+        this.load.image('letterS', 'assets/images/Title/TYPO TITRE/S.PNG');
+        this.load.image('letterV', 'assets/images/Title/TYPO TITRE/V.PNG');
+        this.load.image('letterX', 'assets/images/Title/TYPO TITRE/X.PNG');
+
+        this.load.image('clouds1', 'assets/images/Title/Nuages/clouds1.PNG');
+        this.load.image('clouds2', 'assets/images/Title/Nuages/clouds2.PNG');
+
+        this.load.audio("title_sound", "assets/audio/Title/Ludovico Einaudi - Experience.mp3")
     }
 
     create() {
@@ -69,13 +85,23 @@ export default class TitleScene extends Phaser.Scene {
         let totemfond = this.add.image(0, 0, "totemfond").setOrigin(0);
         totemfond.setDisplaySize(this.game.canvas.width,this.game.canvas.height);
 
+        //Cloud image size
+        let imageBaseWidth = 4961;
+        let imageBaseHeight = 3508;
+
+        //Cloud 1
+        this.cloud1 = this.add.tileSprite(this.game.canvas.width / 2, 100,imageBaseWidth, imageBaseHeight, 'clouds1');
+        this.cloud1.setScale(.6);
+
+        //Cloud 2
+        this.cloud2 = this.add.tileSprite(this.game.canvas.width / 2, 150,imageBaseWidth, imageBaseHeight, 'clouds2');
+        this.cloud2.setScale(.6);
+
         //Totem 2
         this.totem2 = this.add.image(this.totem2x, 0, "totem2").setOrigin(0);
         this.totem2.setScale(this.totem2scale);
         this.totem2.y = this.totem2.y + (this.game.canvas.height - this.totem2.displayHeight);
         this.totem2.y = this.totem2.y + this.totem2.displayHeight; // On ait disparaitre le totem 2 en bas de l'écran
-
-
 
         //Totem 3
         this.totem3 = this.add.image(this.totem3x, 0, "totem3").setOrigin(0);
@@ -108,12 +134,41 @@ export default class TitleScene extends Phaser.Scene {
         this.totem1.y = this.totem1.y + this.totem1.displayHeight; // On ait disparaitre le totem 1 en bas de l'écran
         this.totem1.play('sit');
 
+        let startTitlex = 400;
+        let startTitley = 60;
+        let scaleTitle = .4;
+
+        this.letterL = this.add.image(startTitlex, startTitley, "letterL").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterE1 = this.add.image(startTitlex + 20, startTitley, "letterE").setScale(scaleTitle - .05).setAlpha(0);
+        this.letterS1 = this.add.image(startTitlex + 40, startTitley, "letterS").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterD1 = this.add.image(startTitlex + 100, startTitley, "letterD").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI1 = this.add.image(startTitlex + 120, startTitley, "letterI").setScale(scaleTitle - .05).setAlpha(0);
+        this.letterX = this.add.image(startTitlex + 140, startTitley, "letterX").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterV = this.add.image(startTitlex + 200, startTitley, "letterV").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI2 = this.add.image(startTitlex + 220, startTitley, "letterI").setScale(scaleTitle - .05).setAlpha(0);
+        this.letterE2 = this.add.image(startTitlex + 240, startTitley, "letterE").setScale(scaleTitle - .05).setAlpha(0);
+        this.letterS2 = this.add.image(startTitlex + 260, startTitley, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
+        this.letterD2 = this.add.image(startTitlex + 20, startTitley + 70, "letterD").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterE3 = this.add.image(startTitlex + 50, startTitley + 70, "letterE").setScale(scaleTitle - .05).setAlpha(0);
+        this.letterP = this.add.image(startTitlex + 110, startTitley + 60, "letterP").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI3 = this.add.image(startTitlex + 130, startTitley + 60, "letterI").setScale(scaleTitle).setAlpha(0);
+        this.letterC = this.add.image(startTitlex + 150, startTitley + 60, "letterC").setScale(scaleTitle).setAlpha(0);
+        this.letterA = this.add.image(startTitlex + 170, startTitley + 60, "letterA").setScale(scaleTitle).setAlpha(0);
+        this.letterS3 = this.add.image(startTitlex + 190, startTitley + 60, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
+        this.letterS4 = this.add.image(startTitlex + 210, startTitley + 60, "letterS").setScale(scaleTitle).setAlpha(0);
+        this.letterO = this.add.image(startTitlex + 230, startTitley + 60, "letterO").setScale(scaleTitle).setAlpha(0);
+
         //Fog
         this.fogcreate();
 
         setTimeout(() => {
             this.timer = true;
         }, this.timeout);
+
+        //Démarre le son
+        this.bgSound = this.sound.add('title_sound');
+        this.bgSound.loop = true;
+        this.bgSound.play()
     }
 
     update(){
@@ -124,8 +179,11 @@ export default class TitleScene extends Phaser.Scene {
                 this.totemTimeline(this.totem2, this.totem2FloatingDuration, this.totem2pxFloating, this.totem2speedApparition);
                 this.totemTimeline(this.totem3, this.totem3FloatingDuration, this.totem3pxFloating, this.totem3speedApparition);
                 this.totemTimeline(this.totem4, this.totem4FloatingDuration, this.totem4pxFloating, this.totem4speedApparition);
+                this.titleTimeline();
             }
         }
+        this.cloud1.x += 0.3;
+        this.cloud2.x += 0.1;
     }
 
     backgroundColorTitle() {
@@ -170,6 +228,187 @@ export default class TitleScene extends Phaser.Scene {
             repeat: -1
         });
 
+        timeline.play();
+    }
+
+    titleTimeline(){
+        let timeline = this.tweens.createTimeline();
+
+        //LES
+        timeline.add({
+            targets: this.letterL,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterE1,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterS1,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        //DIX
+        timeline.add({
+            targets: this.letterD1,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterI1,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterX,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        //VIES
+        timeline.add({
+            targets: this.letterV,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterI2,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterE2,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterS2,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        //DE
+        timeline.add({
+            targets: this.letterD2,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterE3,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        //PICASSO
+        timeline.add({
+            targets: this.letterP,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterI3,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterC,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterA,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterS3,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterS4,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
+
+        timeline.add({
+            targets: this.letterO,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            duration: 400
+        });
         timeline.play();
     }
 
