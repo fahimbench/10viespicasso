@@ -14,10 +14,6 @@ const config = {
             width:426,
             height:240,
         },
-        max: {
-            width:1600,
-            height:900,
-        }
     },
     physics:{
         default: 'arcade',
@@ -27,6 +23,6 @@ const config = {
         }
     },
     scene: [TitleScene]
-}
+};
 
 export default config

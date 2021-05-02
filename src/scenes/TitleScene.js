@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import {fullscreen} from "../helpers/fullscreen";
 
 export default class TitleScene extends Phaser.Scene {
 
@@ -78,6 +79,8 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     create() {
+        fullscreen(this);
+
         //Background Color
         this.backgroundColorTitle();
 
