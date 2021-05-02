@@ -112,7 +112,6 @@ export default class TitleScene extends Phaser.Scene {
         this.totem3.y = this.totem3.y + (this.game.canvas.height - this.totem3.displayHeight);
         this.totem3.y = this.totem3.y + this.totem3.displayHeight; // On ait disparaitre le totem 3 en bas de l'écran
 
-
         //Totem 4
         this.totem4 = this.add.image(this.totem4x, 0, "totem4").setOrigin(0);
         this.totem4.setScale(this.totem4scale);
@@ -137,6 +136,7 @@ export default class TitleScene extends Phaser.Scene {
         this.totem1.y = this.totem1.y + this.totem1.displayHeight; // On ait disparaitre le totem 1 en bas de l'écran
         this.totem1.play('sit');
 
+        //TITLE
         let startTitlex = 400;
         let startTitley = 60;
         let scaleTitle = .4;
@@ -172,6 +172,34 @@ export default class TitleScene extends Phaser.Scene {
         this.bgSound = this.sound.add('title_sound');
         this.bgSound.loop = true;
         this.bgSound.play()
+
+        //text clignotant
+        this.blinkText = this.add.text(
+            this.game.canvas.width / 2,
+            this.game.canvas.height - 100,
+            "Appuyer sur un bouton pour commencer",
+            {
+                "font": "30px Blossom",
+                "fill": "#000000",
+            })
+            .setOrigin(.5)
+            .setInteractive( { useHandCursor: true  })
+            .setAlpha(0)
+            .setStroke('#ffffff', 1)
+            .setShadow(2, 2, '#333333', 2, true, false);
+
+        this.titleChapters = [];
+        this.titleChapters.push(this.titleTexts(190, "La Naissance"));
+        this.titleChapters.push(this.titleTexts(225, "La Vie en Bleu"));
+        this.titleChapters.push(this.titleTexts(260, "La vie en Rose "));
+        this.titleChapters.push(this.titleTexts(295, "Je vois la Vie en Cube"));
+        this.titleChapters.push(this.titleTexts(330, "Expérimenter la Vie"));
+        this.titleChapters.push(this.titleTexts(365, "Une Vie Classique"));
+        this.titleChapters.push(this.titleTexts(400, "Une Vie Surréaliste"));
+        this.titleChapters.push(this.titleTexts(435, "Une Vie Symbolique"));
+        this.titleChapters.push(this.titleTexts(470, "La Joie de Vivre"));
+        this.titleChapters.push(this.titleTexts(505, "Fin de Vie"));
+
     }
 
     update(){
@@ -184,6 +212,10 @@ export default class TitleScene extends Phaser.Scene {
                 this.totemTimeline(this.totem4, this.totem4FloatingDuration, this.totem4pxFloating, this.totem4speedApparition);
                 this.titleTimeline();
             }
+        }
+        let testIfChaptersAppear = this.titleChapters.filter((t)=> t.active === true);
+        if(testIfChaptersAppear.length > 0){
+            this.navigateTitle();
         }
         this.cloud1.x += 0.3;
         this.cloud2.x += 0.1;
@@ -210,6 +242,19 @@ export default class TitleScene extends Phaser.Scene {
             this.fog.setActive(false).setVisible(false);
             this.timer = false;
         }
+    }
+
+    blinkPlay(){
+        this.tweens.add({
+            targets: this.blinkText,
+            alpha: {
+                from: .5,
+                to: 1,
+            },
+            duration: 1000,
+            yoyo: true,
+            repeat: -1
+        });
     }
 
     totemTimeline(totem, totemfloatingduration, totempxfloating, totemspeed){
@@ -410,10 +455,134 @@ export default class TitleScene extends Phaser.Scene {
                 from: 0,
                 to: 1
             },
-            duration: 400
+            duration: 400,
+            onStart: () => {
+                this.blinkPlay();
+                this.hideTotem3();
+            }
         });
+
         timeline.play();
     }
 
+    hideTotem3(){
+        this.input.gamepad.once('down',  () => {
+            this.blinkText.destroy();
+            this.tweens.killTweensOf(this.totem3)
+            this.tweens.add({
+                targets: this.totem3,
+                y: this.game.canvas.height,
+                ease: 'Linear',
+                duration: 1000,
+            });
+            this.titleTextsPop();
+        }, this);
+        this.input.keyboard.once('keydown',  () => {
+            this.blinkText.destroy();
+            this.tweens.killTweensOf(this.totem3)
+            this.tweens.add({
+                targets: this.totem3,
+                y: this.game.canvas.height,
+                ease: 'Linear',
+                duration: 1000,
+            });
+            this.titleTextsPop();
+        }, this);
+    }
+
+    titleTexts(y, text){
+        return this.add.text(
+            this.game.canvas.width/2 + 50,
+            y,
+            text,
+            {
+                "font": "30px Blossom",
+                "fill": "#000000",
+            })
+            .setOrigin(.5)
+            .setAlpha(0)
+            .setActive(false)
+    }
+
+    titleTextsPop(){
+        let testIfChaptersAppear = this.titleChapters.filter((t)=> t.active === true);
+        if(testIfChaptersAppear.length === 0) {
+            this.titleChapters[0].setActive(true)
+            let timeline = this.tweens.createTimeline();
+            this.titleChapters.forEach((t, i) => {
+                if (i > 0) {
+                    timeline.add({
+                        targets: t,
+                        alpha: {
+                            from: 0,
+                            to: .5
+                        },
+                        duration: 400,
+                    })
+                } else {
+                    timeline.add({
+                        targets: t,
+                        alpha: {
+                            from: 0,
+                            to: 1
+                        },
+                        duration: 400,
+                    })
+                }
+            });
+            timeline.play();
+        }
+    }
+
+    navigateTitle(){
+        let indexActive = this.titleChapters.map(e => e.active).indexOf(true);
+        this.input.keyboard.once('keydown', event => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    if(indexActive > 0 && indexActive <= this.titleChapters.length - 1){
+                        this.titleChapters[indexActive].active = false;
+                        this.titleChapters[indexActive].alpha = .5;
+
+                        this.titleChapters[indexActive - 1].active = true;
+                        this.titleChapters[indexActive - 1].alpha = 1;
+                    }
+                    break;
+                case 'ArrowDown':
+                    if(indexActive >= 0 && indexActive < this.titleChapters.length - 1){
+                        this.titleChapters[indexActive].active = false;
+                        this.titleChapters[indexActive].alpha = .5;
+
+                        this.titleChapters[indexActive + 1].active = true;
+                        this.titleChapters[indexActive + 1].alpha = 1;
+                    }
+                    break;
+                default:
+            }
+        });
+
+        this.input.gamepad.once('down', (pad, button) => {
+            switch (button.index) {
+                case 13:
+                    if(indexActive >= 0 && indexActive < this.titleChapters.length - 1){
+                        this.titleChapters[indexActive].active = false;
+                        this.titleChapters[indexActive].alpha = .5;
+
+                        this.titleChapters[indexActive + 1].active = true;
+                        this.titleChapters[indexActive + 1].alpha = 1;
+                    }
+                    break;
+                case 12:
+                    if(indexActive > 0 && indexActive <= this.titleChapters.length - 1){
+                        this.titleChapters[indexActive].active = false;
+                        this.titleChapters[indexActive].alpha = .5;
+
+                        this.titleChapters[indexActive - 1].active = true;
+                        this.titleChapters[indexActive - 1].alpha = 1;
+                    }
+                    break;
+                default:
+            }
+        });
+    }
 }
 
