@@ -111,7 +111,7 @@ export default class TitleScene extends Phaser.Scene {
 
         //Totem 3
         this.totem3 = this.add.image(this.totem3x, 0, "totem3").setOrigin(0);
-        this.totem3.setScale(this.totem3scale);
+        this.totem3.setScale(this.totem3scale, .19);
         this.totem3.y = this.totem3.y + (this.game.canvas.height - this.totem3.displayHeight);
         this.totem3.y = this.totem3.y + this.totem3.displayHeight; // On ait disparaitre le totem 3 en bas de l'écran
 
