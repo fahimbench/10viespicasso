@@ -3,7 +3,7 @@ import TitleScene from "../scenes/TitleScene";
 
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: '#000000',
+    backgroundColor: '#ffffff',
     input: {
         gamepad: true
     },
