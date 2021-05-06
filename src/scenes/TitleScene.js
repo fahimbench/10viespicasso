@@ -6,10 +6,10 @@ export default class TitleScene extends Phaser.Scene {
     //----------------------------------------------------------------------------
     //---------------------------A Modifier---------------------------------------
 
-    timeout = 1000; //A partir de quand le fog disparait avec nom de l'event
+    timeout = 3000; //A partir de quand le fog disparait avec nom de l'event
     speedfog = 0.005; //Vitesse disparition fog
     backgroundColor = 0xc6e0f5; //Couleur du fond format 0x
-    fogColor = 0x000000; //Couleur fog format 0x
+    fogColor = 0xffffff; //Couleur fog format 0x
 
     totem1speedApparition = 900; //Vitesse Apparition totem 1
     totem1x = 0; //Position x totem 1
@@ -52,6 +52,8 @@ export default class TitleScene extends Phaser.Scene {
 
     preload(){
         this.load.image('totemfond', 'assets/images/Title/Totems de fond.PNG');
+
+        this.load.image('ryoko', 'assets/images/Title/AfficheRyoko.png');
         this.load.image('totem2', 'assets/images/Title/Totem 2.PNG');
         this.load.image('totem3', 'assets/images/Title/Totem 3.PNG');
         this.load.image('totem4', 'assets/images/Title/Totem 4.PNG');
@@ -83,6 +85,7 @@ export default class TitleScene extends Phaser.Scene {
 
         //Background Color
         this.backgroundColorTitle();
+
 
         //Totem background
         let totemfond = this.add.image(0, 0, "totemfond").setOrigin(0);
@@ -164,6 +167,11 @@ export default class TitleScene extends Phaser.Scene {
         //Fog
         this.fogcreate();
 
+        //Ryoko
+        this.ryoko = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "ryoko")
+            .setOrigin(.5);
+        this.ryoko.setScale(.3);
+
         setTimeout(() => {
             this.timer = true;
         }, this.timeout);
@@ -171,15 +179,15 @@ export default class TitleScene extends Phaser.Scene {
         //Démarre le son
         this.bgSound = this.sound.add('title_sound');
         this.bgSound.loop = true;
-        this.bgSound.play()
+        this.bgSound.play();
 
         //text clignotant
         this.blinkText = this.add.text(
-            this.game.canvas.width / 2,
-            this.game.canvas.height - 100,
+            530,
+            175,
             "Appuyer sur un bouton pour commencer",
             {
-                "font": "30px Blossom",
+                "font": "20px Blossom",
                 "fill": "#000000",
             })
             .setOrigin(.5)
@@ -235,6 +243,7 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     fogkiller() {
+        this.ryoko.destroy();
         if (this.fog.alpha !== 0) {
             this.fog.setAlpha(this.fog.alpha - this.speedfog)
         }
@@ -456,7 +465,7 @@ export default class TitleScene extends Phaser.Scene {
                 to: 1
             },
             duration: 400,
-            onStart: () => {
+            onComplete: () => {
                 this.blinkPlay();
                 this.hideTotem3();
             }
