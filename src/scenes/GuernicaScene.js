@@ -22,7 +22,7 @@ export default class GuernicaScene extends Phaser.Scene {
         this.load.image('guernica', 'assets/images/Levels/GUERNICA/le poignard.PNG');
         this.load.image('guernica', 'assets/images/Levels/GUERNICA/le taureau.PNG');
 
-        this.load.spritesheet("player-idle", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 445, "frameHeight": 915});
+        this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 445, "frameHeight": 915});
     }
 
     create(){
@@ -33,7 +33,7 @@ export default class GuernicaScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 3200, 1200);
         this.cameras.main.setZoom(1.3);
 
-        this.player = new Player(this, 0, 0, {key: 'player'});
+        this.player = new Player(this, 0, 3200, {key: 'player'});
 
         this.cameras.main.startFollow(this.player);
 
