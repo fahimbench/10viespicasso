@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import TitleScene from "../scenes/TitleScene";
+// import TitleScene from "../scenes/TitleScene";
+import GuernicaScene from "../scenes/GuernicaScene";
 
 const config = {
     type: Phaser.AUTO,
@@ -25,7 +26,7 @@ const config = {
             debug: true
         }
     },
-    scene: [TitleScene]
+    scene: [GuernicaScene]
 };
 
 export default config

@@ -208,6 +208,7 @@ export default class TitleScene extends Phaser.Scene {
         this.titleChapters.push(this.titleTexts(470, "La Joie de Vivre"));
         this.titleChapters.push(this.titleTexts(505, "Fin de Vie"));
 
+        // this.scene.start('guernica')
     }
 
     update(){
@@ -543,6 +544,13 @@ export default class TitleScene extends Phaser.Scene {
         }
     }
 
+    swapScene(index){
+        let scene = ["","","","","","","","guernica","","",];
+        this.game.sound.stopAll();
+        this.scene.stop(this);
+        this.scene.start(scene[index])
+    }
+
     navigateTitle(){
         let indexActive = this.titleChapters.map(e => e.active).indexOf(true);
         this.input.keyboard.once('keydown', event => {
@@ -564,6 +572,9 @@ export default class TitleScene extends Phaser.Scene {
                         this.titleChapters[indexActive - 1].active = true;
                         this.titleChapters[indexActive - 1].alpha = 1;
                     }
+                    break;
+                case "Enter":
+                    this.swapScene(indexActive);
                     break;
                 default:
             }
@@ -588,6 +599,9 @@ export default class TitleScene extends Phaser.Scene {
                         this.titleChapters[indexActive - 1].active = true;
                         this.titleChapters[indexActive - 1].alpha = 1;
                     }
+                    break;
+                case 0:
+                    this.swapScene(indexActive);
                     break;
                 default:
             }
