@@ -23,6 +23,9 @@ export default class GuernicaScene extends Phaser.Scene {
         this.load.image('guernica', 'assets/images/Levels/GUERNICA/le taureau.PNG');
 
         this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 445, "frameHeight": 915});
+        this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 630, "frameHeight": 915});
+        this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 618, "frameHeight": 915});
+        this.load.spritesheet("player-fall", "assets/images/Character/Tomber/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
     }
 
     create(){
@@ -31,7 +34,8 @@ export default class GuernicaScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 3200, 1200, true, true, true, true);
         this.add.image(0, 0, 'guernica').setOrigin(0);
         this.cameras.main.setBounds(0, 0, 3200, 1200);
-        this.cameras.main.setZoom(1.3);
+        this.cameras.main.setSize(this.game.canvas.width,this.game.canvas.height);
+        this.cameras.main.setZoom(.8)
 
         this.player = new Player(this, 0, 3200, {key: 'player'});
 

@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
-import TitleScene from "../scenes/TitleScene";
-// import GuernicaScene from "../scenes/GuernicaScene";
+// import TitleScene from "../scenes/TitleScene";
+import GuernicaScene from "../scenes/GuernicaScene";
 
 const config = {
     type: Phaser.AUTO,
@@ -22,11 +22,11 @@ const config = {
     physics:{
         default: 'arcade',
         arcade: {
-            gravity: {y: 200},
+            gravity: {y: 800},
             debug: true
         }
     },
-    scene: [TitleScene]
+    scene: [GuernicaScene]
 };
 
 export default config
