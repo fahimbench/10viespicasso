@@ -61,16 +61,16 @@ export default class Player extends Phaser.GameObjects.Sprite{
 
         this.playerstartwalk = this.scene.anims.create({
             key: 'player-start-walk',
-            frames: this.scene.anims.generateFrameNumbers('player-walk', { start: 1, end: 9 }),
+            frames: this.scene.anims.generateFrameNumbers('player-walk', { start: 0, end: 3 }),
 
             // frameRate: 17,
             repeat: 0,
-            duration: 2000,
+            duration: 1000,
         });
 
         this.playerwalk = this.scene.anims.create({
             key: 'player-walk',
-            frames: this.scene.anims.generateFrameNumbers('player-walk', { start: 10, end: 17 }),
+            frames: this.scene.anims.generateFrameNumbers('player-walk', { start: 9, end: 16 }),
 
             // frameRate: 17,
             repeat: -1,
@@ -104,6 +104,13 @@ export default class Player extends Phaser.GameObjects.Sprite{
             }else{
                 this.anims.play("player-jump", true);
             }
+            if(keys.right.isDown || pad.right){
+                this.setFlipX(false);
+                this.body.setVelocityX(150);
+            } else if (keys.left.isDown || pad.left){
+                this.setFlipX(true);
+                this.body.setVelocityX(-150);
+            }
         }else if((keys.up.isDown || pad.up)){
             if(this.jump !== 1){
                 this.anims.play("player-start-jump", true);
@@ -112,6 +119,13 @@ export default class Player extends Phaser.GameObjects.Sprite{
             if((keys.up.isDown || pad.up)){
                 this.jump = 1;
                 this.body.setVelocityY(-700)
+                if(keys.right.isDown || pad.right){
+                    this.setFlipX(false);
+                    this.body.setVelocityX(150);
+                }else{
+                    this.setFlipX(true);
+                    this.body.setVelocityX(-150);
+                }
             }else{
                 this.jump = 0;
             }
