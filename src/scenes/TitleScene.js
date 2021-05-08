@@ -7,7 +7,7 @@ export default class TitleScene extends Phaser.Scene {
     //----------------------------------------------------------------------------
     //---------------------------A Modifier---------------------------------------
 
-    timeout = 1; //A partir de quand le fog disparait avec nom de l'event
+    timeout = 5000; //A partir de quand le fog disparait avec nom de l'event
     speedfog = 0.005; //Vitesse disparition fog
     backgroundColor = 0xc6e0f5; //Couleur du fond format 0x
     fogColor = 0xffffff; //Couleur fog format 0x
