@@ -51,7 +51,7 @@ export default class GuernicaScene extends Phaser.Scene {
             y: 0,
             key: 'mask',
             add: false
-        }).setScale(1.5);
+        }).setScale(1.2);
 
         this.guernica = this.make.image({
             x: 0,
