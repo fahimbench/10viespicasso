@@ -98,7 +98,7 @@ export default class Player extends Phaser.GameObjects.Sprite{
             pad = this.scene.input.gamepad.getPad(0);
         }
 
-        if(!this.body.onFloor()){
+        if(this.body.velocity.y !== 0){
             if(this.body.velocity.y > 0){
                 this.anims.play("player-start-fall", true);
             }else{

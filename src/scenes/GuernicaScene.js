@@ -4,6 +4,8 @@ import Player from "../Class/Player";
 
 export default class GuernicaScene extends Phaser.Scene {
 
+    score = 0;
+
     constructor() {
         super({key: 'guernica'});
     }
@@ -61,16 +63,16 @@ export default class GuernicaScene extends Phaser.Scene {
         }).setOrigin(0);
 
         this.signe = []
-        this.signe.push(this.add.sprite(0,0,"guernica1").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica2").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica3").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica4").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica5").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica6").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica7").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica8").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica9").setOrigin(0).setAlpha(0));
-        this.signe.push(this.add.image(0,0,"guernica10").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.sprite(0,0,"guernica1").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica2").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica3").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica4").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica5").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica6").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica7").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica8").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica9").setOrigin(0).setVisible(false));
+        this.signe.push(this.add.image(0,0,"guernica10").setOrigin(0).setVisible(false));
 
         this.guernica.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
 
@@ -100,11 +102,24 @@ export default class GuernicaScene extends Phaser.Scene {
         this.spotlight.y = this.player.y;
 
         this.physics.overlap(this.rectsigne, this.player, this.activateSign, null, this);
+        this.win()
     }
 
     activateSign(player, rect){
         const id = parseInt(rect.name);
-        this.signe[id].setAlpha(1)
+        if(this.signe[id].visible === false){
+            this.signe[id].setVisible(true)
+            this.score += 1;
+        }
+    }
+
+    win(){
+        if(this.score === 2){
+            const ratio = (1200 / this.game.canvas.width).toFixed(1);
+            this.guernica.clearMask()
+            this.guernica2.destroy()
+            this.cameras.main.setZoom(this.cameras.main.zoom > ratio ? this.cameras.main.zoom - 0.01  : ratio)
+        }
     }
 
 }

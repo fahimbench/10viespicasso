@@ -147,25 +147,25 @@ export default class TitleScene extends Phaser.Scene {
         let startTitley = 130;
         let scaleTitle = 1.3;
 
-        this.letterL = this.add.image(startTitlex, startTitley, "letterL").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterE1 = this.add.image(startTitlex + 45, startTitley, "letterE").setScale(scaleTitle - .4).setAlpha(0);
-        this.letterS1 = this.add.image(startTitlex + 90, startTitley, "letterS").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterD1 = this.add.image(startTitlex + 200, startTitley, "letterD").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI1 = this.add.image(startTitlex + 255, startTitley, "letterI").setScale(scaleTitle - .4).setAlpha(0);
-        this.letterX = this.add.image(startTitlex + 300, startTitley, "letterX").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterV = this.add.image(startTitlex + 400, startTitley, "letterV").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI2 = this.add.image(startTitlex + 445, startTitley, "letterI").setScale(scaleTitle - .4).setAlpha(0);
-        this.letterE2 = this.add.image(startTitlex + 490, startTitley, "letterE").setScale(scaleTitle - .4).setAlpha(0);
-        this.letterS2 = this.add.image(startTitlex + 535, startTitley, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
-        this.letterD2 = this.add.image(startTitlex + 80, startTitley + 170, "letterD").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterE3 = this.add.image(startTitlex + 140, startTitley + 170, "letterE").setScale(scaleTitle - .4).setAlpha(0);
-        this.letterP = this.add.image(startTitlex + 250, startTitley + 170, "letterP").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI3 = this.add.image(startTitlex + 305, startTitley + 170, "letterI").setScale(scaleTitle).setAlpha(0);
-        this.letterC = this.add.image(startTitlex + 360, startTitley + 170, "letterC").setScale(scaleTitle).setAlpha(0);
-        this.letterA = this.add.image(startTitlex + 415, startTitley + 170, "letterA").setScale(scaleTitle).setAlpha(0);
-        this.letterS3 = this.add.image(startTitlex + 460, startTitley + 170, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
-        this.letterS4 = this.add.image(startTitlex + 505, startTitley + 170, "letterS").setScale(scaleTitle).setAlpha(0);
-        this.letterO = this.add.image(startTitlex + 560, startTitley + 170, "letterO").setScale(scaleTitle).setAlpha(0);
+        this.letterL = this.add.image(startTitlex, startTitley, "letterL").setScale(scaleTitle + .1).setVisible(false);
+        this.letterE1 = this.add.image(startTitlex + 45, startTitley, "letterE").setScale(scaleTitle - .4).setVisible(false);
+        this.letterS1 = this.add.image(startTitlex + 90, startTitley, "letterS").setScale(scaleTitle + .1).setVisible(false);
+        this.letterD1 = this.add.image(startTitlex + 200, startTitley, "letterD").setScale(scaleTitle + .1).setVisible(false);
+        this.letterI1 = this.add.image(startTitlex + 255, startTitley, "letterI").setScale(scaleTitle - .4).setVisible(false);
+        this.letterX = this.add.image(startTitlex + 300, startTitley, "letterX").setScale(scaleTitle + .1).setVisible(false);
+        this.letterV = this.add.image(startTitlex + 400, startTitley, "letterV").setScale(scaleTitle + .1).setVisible(false);
+        this.letterI2 = this.add.image(startTitlex + 445, startTitley, "letterI").setScale(scaleTitle - .4).setVisible(false);
+        this.letterE2 = this.add.image(startTitlex + 490, startTitley, "letterE").setScale(scaleTitle - .4).setVisible(false);
+        this.letterS2 = this.add.image(startTitlex + 535, startTitley, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setVisible(false);
+        this.letterD2 = this.add.image(startTitlex + 80, startTitley + 170, "letterD").setScale(scaleTitle + .1).setVisible(false);
+        this.letterE3 = this.add.image(startTitlex + 140, startTitley + 170, "letterE").setScale(scaleTitle - .4).setVisible(false);
+        this.letterP = this.add.image(startTitlex + 250, startTitley + 170, "letterP").setScale(scaleTitle + .1).setVisible(false);
+        this.letterI3 = this.add.image(startTitlex + 305, startTitley + 170, "letterI").setScale(scaleTitle).setVisible(false);
+        this.letterC = this.add.image(startTitlex + 360, startTitley + 170, "letterC").setScale(scaleTitle).setVisible(false);
+        this.letterA = this.add.image(startTitlex + 415, startTitley + 170, "letterA").setScale(scaleTitle).setVisible(false);
+        this.letterS3 = this.add.image(startTitlex + 460, startTitley + 170, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setVisible(false);
+        this.letterS4 = this.add.image(startTitlex + 505, startTitley + 170, "letterS").setScale(scaleTitle).setVisible(false);
+        this.letterO = this.add.image(startTitlex + 560, startTitley + 170, "letterO").setScale(scaleTitle).setVisible(false);
 
         //Fog
         this.fogcreate();
@@ -195,7 +195,7 @@ export default class TitleScene extends Phaser.Scene {
             })
             .setOrigin(0)
             .setInteractive( { useHandCursor: true  })
-            .setAlpha(0)
+            .setVisible(false)
             .setStroke('#ffffff', 1)
             .setShadow(2, 2, '#333333', 2, true, false);
 
@@ -267,6 +267,7 @@ export default class TitleScene extends Phaser.Scene {
                 from: .5,
                 to: 1,
             },
+            visible: 1,
             duration: 1000,
             yoyo: true,
             repeat: -1
@@ -301,178 +302,197 @@ export default class TitleScene extends Phaser.Scene {
         //LES
         timeline.add({
             targets: this.letterL,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterE1,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterS1,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         //DIX
         timeline.add({
             targets: this.letterD1,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterI1,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterX,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         //VIES
         timeline.add({
             targets: this.letterV,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterI2,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterE2,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterS2,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         //DE
         timeline.add({
             targets: this.letterD2,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterE3,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         //PICASSO
         timeline.add({
             targets: this.letterP,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterI3,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterC,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterA,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterS3,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterS4,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400
         });
 
         timeline.add({
             targets: this.letterO,
-            alpha: {
-                from: 0,
-                to: 1
-            },
+            // alpha: {
+            //     from: 0,
+            //     to: 1
+            // },
+            visible: 1,
             duration: 400,
-            onComplete: () => {
+            onStart: () => {
                 this.blinkPlay();
                 this.hideTotem3();
             }
