@@ -3,8 +3,8 @@ import Phaser from 'phaser'
 import GuernicaScene from "../scenes/GuernicaScene";
 
 const config = {
-    type: Phaser.AUTO,
-    backgroundColor: '#ffffff',
+    type: Phaser.WEBGL,
+    backgroundColor: '#000',
     input: {
         gamepad: true
     },

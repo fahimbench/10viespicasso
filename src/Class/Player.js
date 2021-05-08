@@ -65,7 +65,7 @@ export default class Player extends Phaser.GameObjects.Sprite{
 
             // frameRate: 17,
             repeat: 0,
-            duration: 1000,
+            duration: 500,
         });
 
         this.playerwalk = this.scene.anims.create({
