@@ -37,9 +37,7 @@ export default class GuernicaScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 3200, 1200, true, true, true, true);
         this.cameras.main.setBounds(0, 0, 3200, 1200);
         this.cameras.main.setSize(this.game.canvas.width,this.game.canvas.height);
-        this.cameras.main.setZoom(.8)
-
-
+        this.cameras.main.setZoom(1.6) //2
 
         this.guernica2 = this.make.image({
             x: 0,
@@ -53,7 +51,7 @@ export default class GuernicaScene extends Phaser.Scene {
             y: 0,
             key: 'mask',
             add: false
-        });
+        }).setScale(1.5);
 
         this.guernica = this.make.image({
             x: 0,
@@ -62,26 +60,51 @@ export default class GuernicaScene extends Phaser.Scene {
             add: true
         }).setOrigin(0);
 
-        this.guernica1 = this.add.image(0,0,"guernica1").setOrigin(0)
-        this.guernica2 = this.add.image(0,0,"guernica2").setOrigin(0)
-        this.guernica3 = this.add.image(0,0,"guernica3").setOrigin(0)
-        this.guernica4 = this.add.image(0,0,"guernica4").setOrigin(0)
-        this.guernica5 = this.add.image(0,0,"guernica5").setOrigin(0)
-        this.guernica6 = this.add.image(0,0,"guernica6").setOrigin(0)
-        this.guernica7 = this.add.image(0,0,"guernica7").setOrigin(0)
-        this.guernica8 = this.add.image(0,0,"guernica8").setOrigin(0)
-        this.guernica9 = this.add.image(0,0,"guernica9").setOrigin(0)
-        this.guernica10 = this.add.image(0,0,"guernica10").setOrigin(0)
+        this.signe = []
+        this.signe.push(this.add.sprite(0,0,"guernica1").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica2").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica3").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica4").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica5").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica6").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica7").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica8").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica9").setOrigin(0).setAlpha(0));
+        this.signe.push(this.add.image(0,0,"guernica10").setOrigin(0).setAlpha(0));
 
         this.guernica.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
 
         this.player = new Player(this, 0, 3200, {key: 'player'});
         this.cameras.main.startFollow(this.player);
+        let rectarr = [];
+        rectarr.push(this.add.rectangle(75, 765, 350, 141).setOrigin(0).setName("0"));
+        rectarr.push(this.add.rectangle(733,   202, 247, 203).setOrigin(0).setName("1"));
+        rectarr.push(this.add.rectangle(1660, 954, 75, 68).setOrigin(0).setName("2"));
+        rectarr.push(this.add.rectangle(2535, 884, 619, 211).setOrigin(0).setName("3"));
+        rectarr.push(this.add.rectangle(907, 0, 560, 180).setOrigin(0).setName("4"));
+        rectarr.push(this.add.rectangle(1110, 266, 395, 250).setOrigin(0).setName("5"));
+        rectarr.push(this.add.rectangle(2609, 209, 484, 373).setOrigin(0).setName("6"));
+        rectarr.push(this.add.rectangle(2095, 218, 281, 251).setOrigin(0).setName("7"));
+        rectarr.push(this.add.rectangle(1608, 1044, 282, 134).setOrigin(0).setName("8"));
+        rectarr.push(this.add.rectangle(280, 170, 291, 241).setOrigin(0).setName("9"));
+
+        this.rectsigne = this.physics.add.staticGroup();
+        for(let i = 0; i < rectarr.length; i++){
+            this.rectsigne.add(rectarr[i])
+        }
+
     }
 
     update(){
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
+
+        this.physics.overlap(this.rectsigne, this.player, this.activateSign, null, this);
+    }
+
+    activateSign(player, rect){
+        const id = parseInt(rect.name);
+        this.signe[id].setAlpha(1)
     }
 
 }

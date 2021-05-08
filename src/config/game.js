@@ -4,7 +4,7 @@ import GuernicaScene from "../scenes/GuernicaScene";
 
 const config = {
     type: Phaser.WEBGL,
-    backgroundColor: '#000',
+    backgroundColor: '#ffffff',
     input: {
         gamepad: true
     },
@@ -12,8 +12,8 @@ const config = {
         parent: '#game',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width:960,
-        height:540,
+        width:1920,
+        height:1080,
         min: {
             width:426,
             height:240,

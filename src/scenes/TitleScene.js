@@ -1,37 +1,38 @@
 import Phaser from 'phaser'
 import {fullscreen} from "../helpers/fullscreen";
+import GuernicaScene from "./GuernicaScene";
 
 export default class TitleScene extends Phaser.Scene {
 
     //----------------------------------------------------------------------------
     //---------------------------A Modifier---------------------------------------
 
-    timeout = 4000; //A partir de quand le fog disparait avec nom de l'event
+    timeout = 1; //A partir de quand le fog disparait avec nom de l'event
     speedfog = 0.005; //Vitesse disparition fog
     backgroundColor = 0xc6e0f5; //Couleur du fond format 0x
     fogColor = 0xffffff; //Couleur fog format 0x
 
     totem1speedApparition = 900; //Vitesse Apparition totem 1
-    totem1x = 0; //Position x totem 1
-    totem1scale = .23; //Scale size totem 1
+    totem1x = 50; //Position x totem 1
+    totem1scale = .40; //Scale size totem 1
     totem1FloatingDuration = 3000; //Durée flottement totem 1
     totem1pxFloating= 6; //Nbr pixel de flottement totem 1
 
     totem2speedApparition = 1200; //Vitesse Apparition totem 2
-    totem2x = 150; //Position x totem 2
-    totem2scale = .23; //Scale size totem 2
+    totem2x = 300; //Position x totem 2
+    totem2scale = .45; //Scale size totem 2
     totem2FloatingDuration = 5000; //Durée flottement totem 2
-    totem2pxFloating= 5; //Nbr pixel de flottement totem 2
+    totem2pxFloating= 10; //Nbr pixel de flottement totem 2
 
     totem3speedApparition = 1000; //Vitesse Apparition totem 3
-    totem3x = 370; //Position x totem 3
-    totem3scale = .20; //Scale size totem 3
+    totem3x = 750; //Position x totem 3
+    totem3scale = .40; //Scale size totem 3
     totem3FloatingDuration = 6000; //Durée flottement totem 3
     totem3pxFloating= 8; //Nbr pixel de flottement totem 3
 
     totem4speedApparition = 1500; //Vitesse Apparition totem 4
-    totem4x = 600; //Position x totem 4
-    totem4scale = .20; //Scale size totem 4
+    totem4x = 1150; //Position x totem 4
+    totem4scale = .40; //Scale size totem 4
     totem4FloatingDuration = 4000; //Durée flottement totem 4
     totem4pxFloating= 5; //Nbr pixel de flottement totem 4
 
@@ -51,6 +52,8 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     preload(){
+        this.scene.add("guernica", GuernicaScene, false);
+
         this.load.image('totemfond', 'assets/images/Title/Totems de fond.PNG');
 
         this.load.image('ryoko', 'assets/images/Title/AfficheRyoko.png');
@@ -96,12 +99,12 @@ export default class TitleScene extends Phaser.Scene {
         let imageBaseHeight = 3508;
 
         //Cloud 1
-        this.cloud1 = this.add.tileSprite(this.game.canvas.width / 2, 100,imageBaseWidth, imageBaseHeight, 'clouds1');
-        this.cloud1.setScale(.6);
+        this.cloud1 = this.add.tileSprite(this.game.canvas.width / 2, 300,imageBaseWidth, imageBaseHeight, 'clouds1');
+        this.cloud1.setScale(.8);
 
         //Cloud 2
-        this.cloud2 = this.add.tileSprite(this.game.canvas.width / 2, 150,imageBaseWidth, imageBaseHeight, 'clouds2');
-        this.cloud2.setScale(.6);
+        this.cloud2 = this.add.tileSprite(this.game.canvas.width / 2, 450,imageBaseWidth, imageBaseHeight, 'clouds2');
+        this.cloud2.setScale(.8);
 
         //Totem 2
         this.totem2 = this.add.image(this.totem2x, 0, "totem2").setOrigin(0);
@@ -111,7 +114,7 @@ export default class TitleScene extends Phaser.Scene {
 
         //Totem 3
         this.totem3 = this.add.image(this.totem3x, 0, "totem3").setOrigin(0);
-        this.totem3.setScale(this.totem3scale, .19);
+        this.totem3.setScale(this.totem3scale,.35);
         this.totem3.y = this.totem3.y + (this.game.canvas.height - this.totem3.displayHeight);
         this.totem3.y = this.totem3.y + this.totem3.displayHeight; // On ait disparaitre le totem 3 en bas de l'écran
 
@@ -140,29 +143,29 @@ export default class TitleScene extends Phaser.Scene {
         this.totem1.play('sit');
 
         //TITLE
-        let startTitlex = 400;
-        let startTitley = 60;
-        let scaleTitle = .4;
+        let startTitlex = 750;
+        let startTitley = 130;
+        let scaleTitle = 1.3;
 
         this.letterL = this.add.image(startTitlex, startTitley, "letterL").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterE1 = this.add.image(startTitlex + 20, startTitley, "letterE").setScale(scaleTitle - .05).setAlpha(0);
-        this.letterS1 = this.add.image(startTitlex + 40, startTitley, "letterS").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterD1 = this.add.image(startTitlex + 100, startTitley, "letterD").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI1 = this.add.image(startTitlex + 120, startTitley, "letterI").setScale(scaleTitle - .05).setAlpha(0);
-        this.letterX = this.add.image(startTitlex + 140, startTitley, "letterX").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterV = this.add.image(startTitlex + 200, startTitley, "letterV").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI2 = this.add.image(startTitlex + 220, startTitley, "letterI").setScale(scaleTitle - .05).setAlpha(0);
-        this.letterE2 = this.add.image(startTitlex + 240, startTitley, "letterE").setScale(scaleTitle - .05).setAlpha(0);
-        this.letterS2 = this.add.image(startTitlex + 260, startTitley, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
-        this.letterD2 = this.add.image(startTitlex + 20, startTitley + 70, "letterD").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterE3 = this.add.image(startTitlex + 50, startTitley + 70, "letterE").setScale(scaleTitle - .05).setAlpha(0);
-        this.letterP = this.add.image(startTitlex + 110, startTitley + 60, "letterP").setScale(scaleTitle + .1).setAlpha(0);
-        this.letterI3 = this.add.image(startTitlex + 130, startTitley + 60, "letterI").setScale(scaleTitle).setAlpha(0);
-        this.letterC = this.add.image(startTitlex + 150, startTitley + 60, "letterC").setScale(scaleTitle).setAlpha(0);
-        this.letterA = this.add.image(startTitlex + 170, startTitley + 60, "letterA").setScale(scaleTitle).setAlpha(0);
-        this.letterS3 = this.add.image(startTitlex + 190, startTitley + 60, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
-        this.letterS4 = this.add.image(startTitlex + 210, startTitley + 60, "letterS").setScale(scaleTitle).setAlpha(0);
-        this.letterO = this.add.image(startTitlex + 230, startTitley + 60, "letterO").setScale(scaleTitle).setAlpha(0);
+        this.letterE1 = this.add.image(startTitlex + 45, startTitley, "letterE").setScale(scaleTitle - .4).setAlpha(0);
+        this.letterS1 = this.add.image(startTitlex + 90, startTitley, "letterS").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterD1 = this.add.image(startTitlex + 200, startTitley, "letterD").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI1 = this.add.image(startTitlex + 255, startTitley, "letterI").setScale(scaleTitle - .4).setAlpha(0);
+        this.letterX = this.add.image(startTitlex + 300, startTitley, "letterX").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterV = this.add.image(startTitlex + 400, startTitley, "letterV").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI2 = this.add.image(startTitlex + 445, startTitley, "letterI").setScale(scaleTitle - .4).setAlpha(0);
+        this.letterE2 = this.add.image(startTitlex + 490, startTitley, "letterE").setScale(scaleTitle - .4).setAlpha(0);
+        this.letterS2 = this.add.image(startTitlex + 535, startTitley, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
+        this.letterD2 = this.add.image(startTitlex + 80, startTitley + 170, "letterD").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterE3 = this.add.image(startTitlex + 140, startTitley + 170, "letterE").setScale(scaleTitle - .4).setAlpha(0);
+        this.letterP = this.add.image(startTitlex + 250, startTitley + 170, "letterP").setScale(scaleTitle + .1).setAlpha(0);
+        this.letterI3 = this.add.image(startTitlex + 305, startTitley + 170, "letterI").setScale(scaleTitle).setAlpha(0);
+        this.letterC = this.add.image(startTitlex + 360, startTitley + 170, "letterC").setScale(scaleTitle).setAlpha(0);
+        this.letterA = this.add.image(startTitlex + 415, startTitley + 170, "letterA").setScale(scaleTitle).setAlpha(0);
+        this.letterS3 = this.add.image(startTitlex + 460, startTitley + 170, "letterS").setScale(scaleTitle + .1, scaleTitle + .2).setAlpha(0);
+        this.letterS4 = this.add.image(startTitlex + 505, startTitley + 170, "letterS").setScale(scaleTitle).setAlpha(0);
+        this.letterO = this.add.image(startTitlex + 560, startTitley + 170, "letterO").setScale(scaleTitle).setAlpha(0);
 
         //Fog
         this.fogcreate();
@@ -183,30 +186,33 @@ export default class TitleScene extends Phaser.Scene {
 
         //text clignotant
         this.blinkText = this.add.text(
-            530,
-            175,
+            780,
+            390,
             "Appuyer sur un bouton pour commencer",
             {
-                "font": "20px Blossom",
+                "font": "40px Blossom",
                 "fill": "#000000",
             })
-            .setOrigin(.5)
+            .setOrigin(0)
             .setInteractive( { useHandCursor: true  })
             .setAlpha(0)
             .setStroke('#ffffff', 1)
             .setShadow(2, 2, '#333333', 2, true, false);
 
+        const ytitle = 440;
+        const ydecalage = 65;
+
         this.titleChapters = [];
-        this.titleChapters.push(this.titleTexts(190, "La Naissance"));
-        this.titleChapters.push(this.titleTexts(225, "La Vie en Bleu"));
-        this.titleChapters.push(this.titleTexts(260, "La vie en Rose "));
-        this.titleChapters.push(this.titleTexts(295, "Je vois la Vie en Cube"));
-        this.titleChapters.push(this.titleTexts(330, "Expérimenter la Vie"));
-        this.titleChapters.push(this.titleTexts(365, "Une Vie Classique"));
-        this.titleChapters.push(this.titleTexts(400, "Une Vie Surréaliste"));
-        this.titleChapters.push(this.titleTexts(435, "Une Vie Symbolique"));
-        this.titleChapters.push(this.titleTexts(470, "La Joie de Vivre"));
-        this.titleChapters.push(this.titleTexts(505, "Fin de Vie"));
+        this.titleChapters.push(this.titleTexts(ytitle, "La Naissance"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage), "La Vie en Bleu"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*2), "La vie en Rose "));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*3), "Je vois la Vie en Cube"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*4), "Expérimenter la Vie"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*5), "Une Vie Classique"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*6), "Une Vie Surréaliste"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*7), "Une Vie Symbolique"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*8), "La Joie de Vivre"));
+        this.titleChapters.push(this.titleTexts(ytitle + (ydecalage*9), "Fin de Vie"));
 
         // this.scene.start('guernica')
     }
@@ -502,11 +508,11 @@ export default class TitleScene extends Phaser.Scene {
 
     titleTexts(y, text){
         return this.add.text(
-            this.game.canvas.width/2 + 50,
+            this.game.canvas.width/2 + 90,
             y,
             text,
             {
-                "font": "30px Blossom",
+                "font": "55px Blossom",
                 "fill": "#000000",
             })
             .setOrigin(.5)
@@ -545,10 +551,12 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     swapScene(index){
-        let scene = ["","","","","","","","guernica","","",];
-        this.game.sound.stopAll();
-        this.scene.stop(this);
-        this.scene.start(scene[index])
+        if(this.changeScene === 1){
+            let scene = ["","","","","","","","guernica","","",];
+            this.game.sound.stopAll();
+            this.scene.switch(scene[index])
+            this.scene.stop(this)
+        }
     }
 
     navigateTitle(){
@@ -574,7 +582,10 @@ export default class TitleScene extends Phaser.Scene {
                     }
                     break;
                 case "Enter":
-                    this.swapScene(indexActive);
+                    if(this.changeScene !== 1){
+                        this.changeScene = 1;
+                        this.swapScene(indexActive);
+                    }
                     break;
                 default:
             }
@@ -601,7 +612,10 @@ export default class TitleScene extends Phaser.Scene {
                     }
                     break;
                 case 0:
-                    this.swapScene(indexActive);
+                    if(this.changeScene !== 1){
+                        this.changeScene = 1;
+                        this.swapScene(indexActive);
+                    }
                     break;
                 default:
             }
