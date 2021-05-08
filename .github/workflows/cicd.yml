@@ -26,5 +26,6 @@ jobs:
             cd 10viespicasso
             git checkout main
             git pull
-            yarn install
+            npm i
+            rm -rf dist
             yarn build
