@@ -23,7 +23,7 @@ export default class GuernicaScene extends Phaser.Scene {
         this.load.image('guernica9', 'assets/images/Levels/GUERNICA/le poignard.PNG');
         this.load.image('guernica10', 'assets/images/Levels/GUERNICA/le taureau.PNG');
 
-        this.load.image('mask', 'assets/images/Levels/GUERNICA/mask.PNG');
+        this.load.image('mask', 'assets/images/Levels/GUERNICA/mask.png');
 
         this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 445, "frameHeight": 915});
         this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 630, "frameHeight": 915});
