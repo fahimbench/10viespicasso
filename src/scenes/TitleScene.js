@@ -194,7 +194,6 @@ export default class TitleScene extends Phaser.Scene {
                 "fill": "#000000",
             })
             .setOrigin(0)
-            .setInteractive( { useHandCursor: true  })
             .setVisible(false)
             .setStroke('#ffffff', 1)
             .setShadow(2, 2, '#333333', 2, true, false);

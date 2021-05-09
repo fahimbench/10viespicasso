@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import {fullscreen} from "../helpers/fullscreen";
 import Player from "../Class/Player";
+import TitleScene from "./TitleScene";
 
 export default class GuernicaScene extends Phaser.Scene {
 
@@ -12,6 +13,7 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     preload(){
+        this.scene.add("title", TitleScene, false);
         this.load.image('guernicabg', 'assets/images/Levels/GUERNICA/guernica.PNG');
         this.load.image('guernicabg2', 'assets/images/Levels/GUERNICA/guernica2.PNG');
 
@@ -119,7 +121,7 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     win(){
-        if(this.score >= 10 && this.wingame !== 1){
+        if(this.score >= 1 && this.wingame !== 1){
             const ratio = (1200 / this.game.canvas.width).toFixed(1);
             const pos = (this.game.canvas.height - (1200 * ratio)) / 2;
             if(this.cameras.main.y >= pos && this.cameras.main.zoom <= ratio){
@@ -129,6 +131,7 @@ export default class GuernicaScene extends Phaser.Scene {
                     this.guernica.clearMask();
                     this.guernica2.destroy();
                     this.wingame = 1;
+                    this.exit();
                 }
             }else{
                 this.cameras.main.setPosition(0, this.cameras.main.y < pos ? this.cameras.main.y + .8 : pos)
@@ -162,7 +165,7 @@ export default class GuernicaScene extends Phaser.Scene {
         this.lines.add(this.add.rectangle(2248, 450, 260, 2).setOrigin(0))
         this.lines.add(this.add.rectangle(2605, 270, 85, 2).setOrigin(0))
         this.lines.add(this.add.rectangle( 2820, 430, 140, 2).setOrigin(0))
-        this.lines.add(this.add.rectangle( 2791, 220, 155, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle( 2791, 220, 155, 2).setOrigin(0).setName("sortie"))
 
         this.lines.getChildren().forEach((r) => {
             r.setFillStyle(0xffffff).setVisible(false)
@@ -186,8 +189,9 @@ export default class GuernicaScene extends Phaser.Scene {
 
     }
 
-    collider(){
+    collider(p,t){
         const downKey = this.player.scene.input.keyboard.addKey("down");
+        const enterKey = this.player.scene.input.keyboard.addKey("enter");
         let pad = Phaser.Input.Gamepad.Gamepad;
 
         if (this.player.scene.input.gamepad.total) {
@@ -198,6 +202,34 @@ export default class GuernicaScene extends Phaser.Scene {
             return false;
         }
 
+        if((enterKey.isDown || pad.isButtonDown(0)) && this.wingame && t.name === "sortie"){
+            this.scene.remove(this)
+            this.scene.start("title")
+        }
+
+    }
+
+    exit(){
+        const exit = this.add.text(
+            2823,
+            54,
+            "Sortie",
+            {
+                "font": "42px Blossom",
+                "fill": "#B22222",
+            })
+            .setOrigin(0);
+
+        this.tweens.add({
+            targets: exit,
+            alpha: {
+                from: .6,
+                to: 1,
+            },
+            duration: 1000,
+            yoyo: true,
+            repeat: -1
+        });
     }
 }
 

@@ -6,9 +6,13 @@ import GuernicaScene from "./GuernicaScene";
 
 export default class PreloaderScene extends Phaser.Scene{
 
+
+
     init(data){
         this.data = data;
+        this.isComplete = 0;
     }
+
     constructor() {
         super({key: 'preloader'});
     }
@@ -16,17 +20,6 @@ export default class PreloaderScene extends Phaser.Scene{
     preload () {
         this.screenCenterX = this.game.canvas.width / 2
         this.screenCenterY = this.game.canvas.height / 2
-
-        // this.logo = this.add.sprite(this.screenCenterX, this.screenCenterY, "logo_animated");
-        //
-        // this.anims.create({
-        //     key: 'fly',
-        //     frames: this.anims.generateFrameNumbers('logo_animated', { start: 0, end: 3 }),
-        //     frameRate: 10,
-        //     repeat: -1
-        // });
-        //
-        // this.logo.anims.play('fly', true)
 
         this.progressBar = this.add.graphics()
         this.progressBox = this.add.graphics()
@@ -66,11 +59,7 @@ export default class PreloaderScene extends Phaser.Scene{
         })
 
         this.load.on('complete', () => {
-            this.progressBar.destroy()
-            this.progressBox.destroy()
-            this.percentText.destroy()
-            this.assetText.destroy()
-            this.complete(this.data.name)
+
         });
 
         //Charge Scene and ressource
@@ -105,5 +94,29 @@ export default class PreloaderScene extends Phaser.Scene{
 
     complete(nameScene){
         this.scene.start(nameScene)
+    }
+
+    create(){
+        this.progressBar.destroy();
+        this.progressBox.destroy();
+        this.percentText.destroy();
+        this.assetText.destroy();
+        setTimeout(() => {
+            this.isComplete = 1;
+        }, 1000)
+
+    }
+
+    update() {
+        const enterKey = this.input.keyboard.addKey("enter");
+        let pad = Phaser.Input.Gamepad.Gamepad;
+
+        if (this.input.gamepad.total) {
+            pad = this.input.gamepad.getPad(0);
+        }
+        pad;
+        if(this.isComplete && (enterKey.isDown || pad.A)){
+            this.complete(this.data.name)
+        }
     }
 }
