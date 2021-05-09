@@ -202,7 +202,7 @@ export default class GuernicaScene extends Phaser.Scene {
             return false;
         }
 
-        if((enterKey.isDown || pad.isButtonDown(0)) && this.wingame && t.name === "sortie"){
+        if((enterKey.isDown || pad.A) && this.wingame && t.name === "sortie"){
             this.scene.remove(this)
             this.scene.start("title")
         }
