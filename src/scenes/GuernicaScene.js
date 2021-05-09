@@ -147,8 +147,14 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     collider(p){
-        const downKey = this.input.keyboard.addKey("down");
-        if(downKey.isDown){
+        const downKey = this.player.scene.input.keyboard.addKey("down");
+        let pad = Phaser.Input.Gamepad.Gamepad;
+
+        if (this.player.scene.input.gamepad.total) {
+            pad = this.player.scene.input.gamepad.getPad(0);
+        }
+
+        if(downKey.isDown || pad.down){
             return false;
         }
         if(p.body.onFloor()) {
