@@ -139,30 +139,47 @@ export default class GuernicaScene extends Phaser.Scene {
 
     createPlatforms(){
         this.lines = this.physics.add.staticGroup();
-        this.lines.add(this.add.rectangle(164, 944, 335, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(785, 1002, 100, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1223, 1087, 430, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1929, 969, 110, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2241, 934, 210, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2772, 934, 330, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(145, 751, 110, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(601, 857, 125, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1610, 830, 300, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2115, 670, 400, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2630, 586, 324, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(353, 663, 170, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(733, 614, 345, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1405, 711, 130, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(139, 373, 205, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(358, 167, 271, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(908, 377, 175, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1115, 462, 191, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1321, 241, 70, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(1545, 320, 513, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2248, 450, 260, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle(2605, 270, 85, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle( 2820, 430, 140, 1).setOrigin(0))
-        this.lines.add(this.add.rectangle( 2791, 220, 155, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(164, 944, 335, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(785, 1002, 100, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1223, 1087, 430, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1929, 969, 110, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2241, 934, 210, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2772, 934, 330, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(145, 751, 110, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(601, 857, 125, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1610, 830, 300, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2115, 670, 400, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2630, 586, 324, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(353, 663, 170, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(733, 614, 345, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1405, 711, 130, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(139, 373, 205, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(358, 167, 271, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(908, 377, 175, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1115, 462, 191, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1321, 241, 70, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(1545, 320, 513, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2248, 450, 260, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle(2605, 270, 85, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle( 2820, 430, 140, 2).setOrigin(0))
+        this.lines.add(this.add.rectangle( 2791, 220, 155, 2).setOrigin(0))
+
+        this.lines.getChildren().forEach((r) => {
+            r.setFillStyle(0xffffff).setVisible(false)
+        });
+
+        const FKey = this.input.keyboard.addKey('P');
+
+        FKey.on('down',  () => {
+            this.lines.getChildren().forEach((r) => {
+                if(r.visible === true){
+                    r.setFillStyle(0xffffff).setVisible(false)
+                }else{
+                    r.setFillStyle(0xffffff).setVisible(true)
+                }
+
+            });
+        })
 
         this.physics.add.collider(this.lines, this.player, null, this.collider, this)
 
