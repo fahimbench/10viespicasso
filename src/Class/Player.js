@@ -20,6 +20,8 @@ export default class Player extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
 
         this.body.setCollideWorldBounds(true);
+
+        this.body.setSize(200, 915, true);
         this.setScale(.15)
 
         this.playeridle = this.scene.anims.create({
@@ -84,8 +86,6 @@ export default class Player extends Phaser.GameObjects.Sprite{
             up: UP,
             down: DOWN,
         });
-
-
     }
 
     preUpdate (time, delta) {
@@ -169,5 +169,6 @@ export default class Player extends Phaser.GameObjects.Sprite{
                 }
             }
         });
+
     }
 }

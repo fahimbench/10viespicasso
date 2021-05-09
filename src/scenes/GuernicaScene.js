@@ -5,6 +5,7 @@ import Player from "../Class/Player";
 export default class GuernicaScene extends Phaser.Scene {
 
     score = 0;
+    wingame = 0;
 
     constructor() {
         super({key: 'guernica'});
@@ -27,9 +28,9 @@ export default class GuernicaScene extends Phaser.Scene {
 
         this.load.image('mask', 'assets/images/Levels/GUERNICA/mask.png');
 
-        this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 445, "frameHeight": 915});
-        this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 630, "frameHeight": 915});
-        this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 618, "frameHeight": 915});
+        this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
+        this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
+        this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
         this.load.spritesheet("player-fall", "assets/images/Character/Tomber/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
     }
 
@@ -76,7 +77,7 @@ export default class GuernicaScene extends Phaser.Scene {
 
         this.guernica.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
 
-        this.player = new Player(this, 0, 3200, {key: 'player'});
+        this.player = new Player(this, 0, 1200, {key: 'player'});
         this.cameras.main.startFollow(this.player);
         let rectarr = [];
         rectarr.push(this.add.rectangle(75, 765, 350, 141).setOrigin(0).setName("0"));
@@ -95,6 +96,9 @@ export default class GuernicaScene extends Phaser.Scene {
             this.rectsigne.add(rectarr[i])
         }
 
+        this.createPlatforms();
+
+        this.player.body.checkCollision.up = false;
     }
 
     update(){
@@ -114,13 +118,38 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     win(){
-        if(this.score === 2){
+        if(this.score === 1 && this.wingame !== 1){
             const ratio = (1200 / this.game.canvas.width).toFixed(1);
-            this.guernica.clearMask()
-            this.guernica2.destroy()
-            this.cameras.main.setZoom(this.cameras.main.zoom > ratio ? this.cameras.main.zoom - 0.01  : ratio)
+            const pos = (this.game.canvas.height - (1200 * ratio)) / 2;
+            if(this.cameras.main.y >= pos && this.cameras.main.zoom <= ratio){
+                if(this.spotlight.scale < 30){
+                    this.spotlight.setScale(this.spotlight.scale + 0.2);
+                }else{
+                    this.guernica.clearMask();
+                    this.guernica2.destroy();
+                    this.wingame = 1;
+                }
+            }else{
+                this.cameras.main.setPosition(0, this.cameras.main.y < pos ? this.cameras.main.y + .8 : pos)
+                this.cameras.main.setZoom(this.cameras.main.zoom > ratio ? this.cameras.main.zoom - 0.005  : ratio)
+            }
         }
     }
 
+    createPlatforms(){
+        this.lines = this.physics.add.staticGroup();
+        let rect = this.add.rectangle(150, 1150, 350, 1).setOrigin(0)
+        this.lines.add(rect)
+
+        this.physics.add.collider(this.lines, this.player, null, this.collider, this)
+
+
+    }
+
+    collider(p){
+        if(p.body.onFloor()) {
+            return false;
+        }
+    }
 }
 

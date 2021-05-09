@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import {fullscreen} from "../helpers/fullscreen";
-import GuernicaScene from "./GuernicaScene";
+import PreloaderScene from "./PreloaderScene";
 
 export default class TitleScene extends Phaser.Scene {
 
@@ -52,7 +52,7 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     preload(){
-        this.scene.add("guernica", GuernicaScene, false);
+        this.scene.add("preloader", PreloaderScene, false);
 
         this.load.image('totemfond', 'assets/images/Title/Totems de fond.PNG');
 
@@ -574,7 +574,7 @@ export default class TitleScene extends Phaser.Scene {
         if(this.changeScene === 1){
             let scene = ["","","","","","","","guernica","","",];
             this.game.sound.stopAll();
-            this.scene.switch(scene[index])
+            this.scene.start("preloader", {name: scene[index]});
             this.scene.stop(this)
         }
     }
