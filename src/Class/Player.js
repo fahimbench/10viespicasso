@@ -113,12 +113,13 @@ export default class Player extends Phaser.GameObjects.Sprite{
             }
         }else if((keys.up.isDown || pad.up)){
             if(this.jump !== 1){
+                this.body.setVelocityY(-800)
                 this.anims.play("player-start-jump", true);
             }
         }else if((keys.right.isDown || pad.right) || (keys.left.isDown || pad.left)){
             if((keys.up.isDown || pad.up)){
                 this.jump = 1;
-                this.body.setVelocityY(-700)
+                this.body.setVelocityY(-800)
                 if(keys.right.isDown || pad.right){
                     this.setFlipX(false);
                     this.body.setVelocityX(150);
@@ -160,7 +161,6 @@ export default class Player extends Phaser.GameObjects.Sprite{
             if (sprite.key === 'player-start-jump'){
                 if(this.jump !== 1){
                     this.jump = 1;
-                    this.body.setVelocityY(-700)
                 }
             }
             if (sprite.key === 'player-start-walk'){
