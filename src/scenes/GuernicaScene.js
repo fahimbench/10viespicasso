@@ -141,15 +141,20 @@ export default class GuernicaScene extends Phaser.Scene {
         let rect = this.add.rectangle(150, 1150, 350, 1).setOrigin(0)
         this.lines.add(rect)
 
-        this.physics.add.collider(this.lines, this.player, null, this.collider, this)
+        this.physics.add.collider(this.lines, this.player, this.collider, this.collider, this)
 
 
     }
 
     collider(p){
+        const downKey = this.input.keyboard.addKey("down");
+        if(downKey.isDown){
+            return false;
+        }
         if(p.body.onFloor()) {
             return false;
         }
+
     }
 }
 
