@@ -77,7 +77,7 @@ export default class GuernicaScene extends Phaser.Scene {
 
         this.guernica.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
 
-        this.player = new Player(this, 0, 1200, {key: 'player'});
+        this.player = new Player(this, 1750, 400, {key: 'player'});
         this.cameras.main.startFollow(this.player);
         let rectarr = [];
         rectarr.push(this.add.rectangle(75, 765, 350, 141).setOrigin(0).setName("0"));
@@ -99,12 +99,13 @@ export default class GuernicaScene extends Phaser.Scene {
         this.createPlatforms();
 
         this.player.body.checkCollision.up = false;
+        this.player.body.checkCollision.right = false
+        this.player.body.checkCollision.left = false
     }
 
     update(){
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
-
         this.physics.overlap(this.rectsigne, this.player, this.activateSign, null, this);
         this.win()
     }
@@ -118,7 +119,7 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     win(){
-        if(this.score === 1 && this.wingame !== 1){
+        if(this.score >= 10 && this.wingame !== 1){
             const ratio = (1200 / this.game.canvas.width).toFixed(1);
             const pos = (this.game.canvas.height - (1200 * ratio)) / 2;
             if(this.cameras.main.y >= pos && this.cameras.main.zoom <= ratio){
@@ -138,15 +139,37 @@ export default class GuernicaScene extends Phaser.Scene {
 
     createPlatforms(){
         this.lines = this.physics.add.staticGroup();
-        let rect = this.add.rectangle(150, 1150, 350, 1).setOrigin(0)
-        this.lines.add(rect)
+        this.lines.add(this.add.rectangle(164, 944, 335, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(785, 1002, 100, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1223, 1087, 430, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1929, 969, 110, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2241, 934, 210, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2772, 934, 330, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(145, 751, 110, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(601, 857, 125, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1610, 830, 300, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2115, 670, 400, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2630, 586, 324, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(353, 663, 170, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(733, 614, 345, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1405, 711, 130, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(139, 373, 205, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(358, 167, 271, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(908, 377, 175, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1115, 462, 191, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1321, 241, 70, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(1545, 320, 513, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2248, 450, 260, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle(2605, 270, 85, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle( 2820, 430, 140, 1).setOrigin(0))
+        this.lines.add(this.add.rectangle( 2791, 220, 155, 1).setOrigin(0))
 
-        this.physics.add.collider(this.lines, this.player, this.collider, this.collider, this)
+        this.physics.add.collider(this.lines, this.player, null, this.collider, this)
 
 
     }
 
-    collider(p){
+    collider(){
         const downKey = this.player.scene.input.keyboard.addKey("down");
         let pad = Phaser.Input.Gamepad.Gamepad;
 
@@ -155,9 +178,6 @@ export default class GuernicaScene extends Phaser.Scene {
         }
 
         if(downKey.isDown || pad.down){
-            return false;
-        }
-        if(p.body.onFloor()) {
             return false;
         }
 
