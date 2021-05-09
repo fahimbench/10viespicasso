@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import GuernicaScene from "../scenes/GuernicaScene";
+import TitleScene from "../scenes/TitleScene";
 
 const config = {
     type: Phaser.WEBGL,
@@ -25,7 +25,7 @@ const config = {
             debug: true
         }
     },
-    scene: [GuernicaScene]
+    scene: [TitleScene]
 };
 
 export default config
