@@ -21,50 +21,52 @@ export default class PreloaderScene extends Phaser.Scene{
         this.screenCenterX = this.game.canvas.width / 2
         this.screenCenterY = this.game.canvas.height / 2
 
-        this.progressBar = this.add.graphics()
-        this.progressBox = this.add.graphics()
-        this.progressBox.fillStyle(0x000000, 0.8)
-        this.progressBox.fillRect(this.screenCenterX - 160, this.screenCenterY + 100, 304, 34)
-
-        this.percentText = this.make.text({
-            x: this.screenCenterX,
-            y: this.screenCenterY + 120,
-            text: '0%',
-            style: {
-                font: '18px monospace',
-                fill: '#ffffff'
-            }
-        }).setOrigin(.5,.5)
-
-        this.assetText = this.make.text({
-            x: this.screenCenterX,
-            y: this.screenCenterY + 70,
-            text: '',
-            style: {
-                font: '18px monospace',
-                fill: '#000000'
-            }
-        }).setOrigin(0.5, 0.5);
-
-        this.load.on('progress', (value) => {
-            this.percentText.setText(parseInt(value * 100) + '%')
-            this.progressBar.clear()
-            this.progressBar.fillStyle(0xffffff, 1)
-            this.progressBar.fillRect(this.screenCenterX - 158, this.screenCenterY + 102, 300 * value, 30)
-        })
-
-        this.load.on('fileprogress', (file) => {
-            console.log('Loading asset: ' + file.key)
-            this.assetText.setText('Loading asset: ' + file.key)
-        })
-
-        this.load.on('complete', () => {
-
-        });
+        // this.progressBar = this.add.graphics()
+        // this.progressBox = this.add.graphics()
+        // this.progressBox.fillStyle(0x000000, 0.8)
+        // this.progressBox.fillRect(this.screenCenterX - 160, this.screenCenterY + 100, 304, 34)
+        //
+        // this.percentText = this.make.text({
+        //     x: this.screenCenterX,
+        //     y: this.screenCenterY + 120,
+        //     text: '0%',
+        //     style: {
+        //         font: '18px monospace',
+        //         fill: '#ffffff'
+        //     }
+        // }).setOrigin(.5,.5)
+        //
+        // this.assetText = this.make.text({
+        //     x: this.screenCenterX,
+        //     y: this.screenCenterY + 70,
+        //     text: '',
+        //     style: {
+        //         font: '18px monospace',
+        //         fill: '#000000'
+        //     }
+        // }).setOrigin(0.5, 0.5);
+        //
+        // this.load.on('progress', (value) => {
+        //     this.percentText.setText(parseInt(value * 100) + '%')
+        //     this.progressBar.clear()
+        //     this.progressBar.fillStyle(0xffffff, 1)
+        //     this.progressBar.fillRect(this.screenCenterX - 158, this.screenCenterY + 102, 300 * value, 30)
+        // })
+        //
+        // this.load.on('fileprogress', (file) => {
+        //     console.log('Loading asset: ' + file.key)
+        //     this.assetText.setText('Loading asset: ' + file.key)
+        // })
+        //
+        // this.load.on('complete', () => {
+        //
+        // });
 
         //Charge Scene and ressource
         switch (this.data.name) {
             case "guernica":
+                this.cameras.main.setBackgroundColor('#000000');
+
                 this.scene.add("guernica", GuernicaScene, false);
                 this.load.image('guernicabg', 'assets/images/Levels/GUERNICA/guernica.PNG');
                 this.load.image('guernicabg2', 'assets/images/Levels/GUERNICA/guernica2.PNG');
@@ -86,6 +88,7 @@ export default class PreloaderScene extends Phaser.Scene{
                 this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
                 this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
                 this.load.spritesheet("player-fall", "assets/images/Character/Tomber/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
+
                 break;
             default:
         }
@@ -97,26 +100,76 @@ export default class PreloaderScene extends Phaser.Scene{
     }
 
     create(){
-        this.progressBar.destroy();
-        this.progressBox.destroy();
-        this.percentText.destroy();
-        this.assetText.destroy();
-        setTimeout(() => {
-            this.isComplete = 1;
-        }, 1000)
+        // this.progressBar.destroy();
+        // this.progressBox.destroy();
+        // this.percentText.destroy();
+        // this.assetText.destroy();
+
+        switch (this.data.name) {
+            case "guernica":
+                this.instructionGuernica();
+                break;
+            default:
+        }
+        // setTimeout(() => {
+        //     this.complete(this.data.name)
+        // }, 6000)
 
     }
 
     update() {
-        const enterKey = this.input.keyboard.addKey("enter");
-        let pad = Phaser.Input.Gamepad.Gamepad;
-
-        if (this.input.gamepad.total) {
-            pad = this.input.gamepad.getPad(0);
-        }
-        pad;
-        if(this.isComplete && (enterKey.isDown || pad.A)){
-            this.complete(this.data.name)
-        }
+        // const enterKey = this.input.keyboard.addKey("enter");
+        // let pad = Phaser.Input.Gamepad.Gamepad;
+        //
+        // if (this.input.gamepad.total) {
+        //     pad = this.input.gamepad.getPad(0);
+        // }
+        // pad;
+        // if(this.isComplete && (enterKey.isDown || pad.A)){
+        //     this.complete(this.data.name)
+        // }
     }
+
+
+    instructionGuernica(){
+        let startx = 450;
+        let starty = 530;
+        const words = String("Aidez Ryoko a trouver les dix symboles de l’oeuvre").split(" ");
+        const decal = [0,130,270,320,500,570,650,830,900];
+        for(let i=0;i<words.length;i++) {
+            words[i] = this.add.text(
+                startx + decal[i],
+                starty,
+                words[i],
+                {
+                    "font": "55px Blossom",
+                    "fill": "#ffffff",
+                }).setOrigin(0).setVisible(false).setAlpha(0)
+
+            this.tweens.add({
+                targets: words[i],
+                y: words[i].y - 30,
+                ease: 'Linear',
+                alpha: {
+                    from: 0,
+                    to: 1
+                },
+                visible: 1,
+                duration: 500,
+                delay: 500 * (i),
+                onComplete: () => {
+                    if(i === words.length - 1){
+                        setTimeout(() => {
+                            this.complete(this.data.name)
+                        }, 3000)
+                    }
+                }
+            });
+        }
+
+
+
+    }
+
+
 }

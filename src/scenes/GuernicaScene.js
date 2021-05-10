@@ -56,7 +56,7 @@ export default class GuernicaScene extends Phaser.Scene {
             y: 0,
             key: 'mask',
             add: false
-        }).setScale(1.2);
+        }).setScale(0);
 
         this.guernica = this.make.image({
             x: 0,
@@ -106,6 +106,11 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     update(){
+        if(this.spotlight.scale < 1.2){
+            this.player.body.setVelocityY(1);
+            this.spotlight.setScale(this.spotlight.scale + 0.02)
+        }
+
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
         this.physics.overlap(this.rectsigne, this.player, this.activateSign, null, this);
