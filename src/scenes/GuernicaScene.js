@@ -126,7 +126,7 @@ export default class GuernicaScene extends Phaser.Scene {
     }
 
     win(){
-        if(this.score >= 1 && this.wingame !== 1){
+        if(this.score >= 10  && this.wingame !== 1){
             const ratio = (1200 / this.game.canvas.width).toFixed(1);
             const pos = (this.game.canvas.height - (1200 * ratio)) / 2;
             if(this.cameras.main.y >= pos && this.cameras.main.zoom <= ratio){
