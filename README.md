@@ -1,4 +1,8 @@
-# game
+# Les 10 vies de picasso
+
+Seulement le niveau 8 est opérationel
+
+https://les10viesdepicasso.fahim-benchaabane.fr
 
 ## Project setup
 ```
