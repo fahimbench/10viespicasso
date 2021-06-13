@@ -571,7 +571,7 @@ export default class TitleScene extends Phaser.Scene {
 
     swapScene(index){
         if(this.changeScene === 1){
-            let scene = ["","","","","","","","guernica","","",];
+            let scene = ["lvl1","lvl2","lvl3","lvl4","lvl5","lvl6","lvl7","guernica","lvl9","lvl10",];
             this.game.sound.stopAll();
             this.scene.start("preloader", {name: scene[index]});
             this.scene.stop(this)

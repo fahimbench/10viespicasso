@@ -14,21 +14,21 @@ export default class GuernicaScene extends Phaser.Scene {
 
     preload(){
         this.scene.add("title", TitleScene, false);
-        this.load.image('guernicabg', 'assets/images/Levels/GUERNICA/guernica.PNG');
-        this.load.image('guernicabg2', 'assets/images/Levels/GUERNICA/guernica2.PNG');
+        this.load.image('guernicabg', 'assets/images/Levels/LVL8/guernica.PNG');
+        this.load.image('guernicabg2', 'assets/images/Levels/LVL8/guernica2.PNG');
 
-        this.load.image('guernica1', 'assets/images/Levels/GUERNICA/l enfant.PNG');
-        this.load.image('guernica2', 'assets/images/Levels/GUERNICA/la colombe.PNG');
-        this.load.image('guernica3', 'assets/images/Levels/GUERNICA/la fleur.PNG');
-        this.load.image('guernica4', 'assets/images/Levels/GUERNICA/la jambe boiteuse.PNG');
-        this.load.image('guernica5', 'assets/images/Levels/GUERNICA/la lampe.PNG');
-        this.load.image('guernica6', 'assets/images/Levels/GUERNICA/le cheval.PNG');
-        this.load.image('guernica7', 'assets/images/Levels/GUERNICA/le cri.PNG');
-        this.load.image('guernica8', 'assets/images/Levels/GUERNICA/le fantome.PNG');
-        this.load.image('guernica9', 'assets/images/Levels/GUERNICA/le poignard.PNG');
-        this.load.image('guernica10', 'assets/images/Levels/GUERNICA/le taureau.PNG');
+        this.load.image('guernica1', 'assets/images/Levels/LVL8/l enfant.PNG');
+        this.load.image('guernica2', 'assets/images/Levels/LVL8/la colombe.PNG');
+        this.load.image('guernica3', 'assets/images/Levels/LVL8/la fleur.PNG');
+        this.load.image('guernica4', 'assets/images/Levels/LVL8/la jambe boiteuse.PNG');
+        this.load.image('guernica5', 'assets/images/Levels/LVL8/la lampe.PNG');
+        this.load.image('guernica6', 'assets/images/Levels/LVL8/le cheval.PNG');
+        this.load.image('guernica7', 'assets/images/Levels/LVL8/le cri.PNG');
+        this.load.image('guernica8', 'assets/images/Levels/LVL8/le fantome.PNG');
+        this.load.image('guernica9', 'assets/images/Levels/LVL8/le poignard.PNG');
+        this.load.image('guernica10', 'assets/images/Levels/LVL8/le taureau.PNG');
 
-        this.load.image('mask', 'assets/images/Levels/GUERNICA/mask.png');
+        this.load.image('mask', 'assets/images/Levels/LVL8/mask.png');
 
         this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
         this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
