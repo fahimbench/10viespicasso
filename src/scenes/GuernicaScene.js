@@ -34,6 +34,8 @@ export default class GuernicaScene extends Phaser.Scene {
         this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
         this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
         this.load.spritesheet("player-fall", "assets/images/Character/Tomber/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
+
+        this.load.audio("guernica_sound", "assets/audio/Guernica/ludovico-einaudi-night-official-video.mp3")
     }
 
     create(){
@@ -103,6 +105,11 @@ export default class GuernicaScene extends Phaser.Scene {
         this.player.body.checkCollision.up = false;
         this.player.body.checkCollision.right = false
         this.player.body.checkCollision.left = false
+
+        //Démarre le son
+        this.bgSound = this.sound.add('guernica_sound');
+        this.bgSound.loop = true;
+        this.bgSound.play();
     }
 
     update(){
