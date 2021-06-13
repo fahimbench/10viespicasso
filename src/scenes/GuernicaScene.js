@@ -215,6 +215,7 @@ export default class GuernicaScene extends Phaser.Scene {
         }
 
         if((enterKey.isDown || pad.A) && this.wingame && t.name === "sortie"){
+            this.game.sound.stopAll();
             this.scene.remove(this)
             this.scene.start("title")
         }
