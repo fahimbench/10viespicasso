@@ -1,16 +1,18 @@
 import Phaser from 'phaser'
 import GuernicaScene from "./GuernicaScene";
-
-// import importRessources from '../helpers/ressources'
-// import ressourcesJson from '../config/ressources'
+import Lvl1Scene from "./lvl1Scene";
+import Lvl2Scene from "./lvl2Scene";
+import Lvl3Scene from "./lvl3Scene";
+import Lvl4Scene from "./lvl4Scene";
+import Lvl5Scene from "./lvl5Scene";
+import Lvl6Scene from "./lvl6Scene";
+import Lvl7Scene from "./lvl7Scene";
+import Lvl9Scene from "./lvl9Scene";
+import Lvl10Scene from "./lvl10Scene";
 
 export default class PreloaderScene extends Phaser.Scene{
-
-
-
     init(data){
         this.data = data;
-        this.isComplete = 0;
     }
 
     constructor() {
@@ -18,77 +20,60 @@ export default class PreloaderScene extends Phaser.Scene{
     }
 
     preload () {
-        this.screenCenterX = this.game.canvas.width / 2
-        this.screenCenterY = this.game.canvas.height / 2
-
-        // this.progressBar = this.add.graphics()
-        // this.progressBox = this.add.graphics()
-        // this.progressBox.fillStyle(0x000000, 0.8)
-        // this.progressBox.fillRect(this.screenCenterX - 160, this.screenCenterY + 100, 304, 34)
-        //
-        // this.percentText = this.make.text({
-        //     x: this.screenCenterX,
-        //     y: this.screenCenterY + 120,
-        //     text: '0%',
-        //     style: {
-        //         font: '18px monospace',
-        //         fill: '#ffffff'
-        //     }
-        // }).setOrigin(.5,.5)
-        //
-        // this.assetText = this.make.text({
-        //     x: this.screenCenterX,
-        //     y: this.screenCenterY + 70,
-        //     text: '',
-        //     style: {
-        //         font: '18px monospace',
-        //         fill: '#000000'
-        //     }
-        // }).setOrigin(0.5, 0.5);
-        //
-        // this.load.on('progress', (value) => {
-        //     this.percentText.setText(parseInt(value * 100) + '%')
-        //     this.progressBar.clear()
-        //     this.progressBar.fillStyle(0xffffff, 1)
-        //     this.progressBar.fillRect(this.screenCenterX - 158, this.screenCenterY + 102, 300 * value, 30)
-        // })
-        //
-        // this.load.on('fileprogress', (file) => {
-        //     console.log('Loading asset: ' + file.key)
-        //     this.assetText.setText('Loading asset: ' + file.key)
-        // })
-        //
-        // this.load.on('complete', () => {
-        //
-        // });
-
         //Charge Scene and ressource
         switch (this.data.name) {
             case "guernica":
                 this.cameras.main.setBackgroundColor('#000000');
 
                 this.scene.add("guernica", GuernicaScene, false);
-                this.load.image('guernicabg', 'assets/images/Levels/GUERNICA/guernica.PNG');
-                this.load.image('guernicabg2', 'assets/images/Levels/GUERNICA/guernica2.PNG');
+                this.load.image('guernicabg', 'assets/images/Levels/LVL8/guernica.PNG');
+                this.load.image('guernicabg2', 'assets/images/Levels/LVL8/guernica2.PNG');
 
-                this.load.image('guernica1', 'assets/images/Levels/GUERNICA/l enfant.PNG');
-                this.load.image('guernica2', 'assets/images/Levels/GUERNICA/la colombe.PNG');
-                this.load.image('guernica3', 'assets/images/Levels/GUERNICA/la fleur.PNG');
-                this.load.image('guernica4', 'assets/images/Levels/GUERNICA/la jambe boiteuse.PNG');
-                this.load.image('guernica5', 'assets/images/Levels/GUERNICA/la lampe.PNG');
-                this.load.image('guernica6', 'assets/images/Levels/GUERNICA/le cheval.PNG');
-                this.load.image('guernica7', 'assets/images/Levels/GUERNICA/le cri.PNG');
-                this.load.image('guernica8', 'assets/images/Levels/GUERNICA/le fantome.PNG');
-                this.load.image('guernica9', 'assets/images/Levels/GUERNICA/le poignard.PNG');
-                this.load.image('guernica10', 'assets/images/Levels/GUERNICA/le taureau.PNG');
+                this.load.image('guernica1', 'assets/images/Levels/LVL8/l enfant.PNG');
+                this.load.image('guernica2', 'assets/images/Levels/LVL8/la colombe.PNG');
+                this.load.image('guernica3', 'assets/images/Levels/LVL8/la fleur.PNG');
+                this.load.image('guernica4', 'assets/images/Levels/LVL8/la jambe boiteuse.PNG');
+                this.load.image('guernica5', 'assets/images/Levels/LVL8/la lampe.PNG');
+                this.load.image('guernica6', 'assets/images/Levels/LVL8/le cheval.PNG');
+                this.load.image('guernica7', 'assets/images/Levels/LVL8/le cri.PNG');
+                this.load.image('guernica8', 'assets/images/Levels/LVL8/le fantome.PNG');
+                this.load.image('guernica9', 'assets/images/Levels/LVL8/le poignard.PNG');
+                this.load.image('guernica10', 'assets/images/Levels/LVL8/le taureau.PNG');
 
-                this.load.image('mask', 'assets/images/Levels/GUERNICA/mask.png');
+                this.load.image('mask', 'assets/images/Levels/LVL8/mask.png');
 
                 this.load.spritesheet("player", "assets/images/Character/Statique/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
                 this.load.spritesheet("player-walk", "assets/images/Character/Avancer/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
                 this.load.spritesheet("player-jump", "assets/images/Character/Sauter/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
                 this.load.spritesheet("player-fall", "assets/images/Character/Tomber/spritesheet.png", {"frameWidth": 773, "frameHeight": 915});
 
+                break;
+            case "lvl1":
+                this.scene.add("lvl1", Lvl1Scene, false);
+                break;
+            case "lvl2":
+                this.scene.add("lvl2", Lvl2Scene, false);
+                break;
+            case "lvl3":
+                this.scene.add("lvl3", Lvl3Scene, false);
+                break;
+            case "lvl4":
+                this.scene.add("lvl4", Lvl4Scene, false);
+                break;
+            case "lvl5":
+                this.scene.add("lvl5", Lvl5Scene, false);
+                break;
+            case "lvl6":
+                this.scene.add("lvl6", Lvl6Scene, false);
+                break;
+            case "lvl7":
+                this.scene.add("lvl7", Lvl7Scene, false);
+                break;
+            case "lvl9":
+                this.scene.add("lvl9", Lvl9Scene, false);
+                break;
+            case "lvl10":
+                this.scene.add("lvl10", Lvl10Scene, false);
                 break;
             default:
         }
@@ -100,36 +85,40 @@ export default class PreloaderScene extends Phaser.Scene{
     }
 
     create(){
-        // this.progressBar.destroy();
-        // this.progressBox.destroy();
-        // this.percentText.destroy();
-        // this.assetText.destroy();
-
         switch (this.data.name) {
             case "guernica":
                 this.instructionGuernica();
                 break;
+            case "lvl1":
+                 this.scene.start("lvl1")
+                break;
+            case "lvl2":
+                 this.scene.start("lvl2")
+                break;
+            case "lvl3":
+                 this.scene.start("lvl3")
+                break;
+            case "lvl4":
+                 this.scene.start("lvl4")
+                break;
+            case "lvl5":
+                 this.scene.start("lvl5")
+                break;
+            case "lvl6":
+                 this.scene.start("lvl6")
+                break;
+            case "lvl7":
+                 this.scene.start("lvl7")
+                break;
+            case "lvl9":
+                 this.scene.start("lvl9")
+                break;
+            case "lvl10":
+                 this.scene.start("lvl10")
+                break;
             default:
         }
-        // setTimeout(() => {
-        //     this.complete(this.data.name)
-        // }, 6000)
-
     }
-
-    update() {
-        // const enterKey = this.input.keyboard.addKey("enter");
-        // let pad = Phaser.Input.Gamepad.Gamepad;
-        //
-        // if (this.input.gamepad.total) {
-        //     pad = this.input.gamepad.getPad(0);
-        // }
-        // pad;
-        // if(this.isComplete && (enterKey.isDown || pad.A)){
-        //     this.complete(this.data.name)
-        // }
-    }
-
 
     instructionGuernica(){
         let startx = 450;
@@ -166,9 +155,6 @@ export default class PreloaderScene extends Phaser.Scene{
                 }
             });
         }
-
-
-
     }
 
 
